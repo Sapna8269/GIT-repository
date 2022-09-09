@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="9e38ff2e-c29b-4e1c-9426-2033dc634dd0" >
+		<http:listener-connection host="${http.listener.host}" port="${http.listener.port}" />
+	</http:listener-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="a51b25e5-8c05-4968-832a-ebb4baf73738" file="Config\local.yaml" />
+	<flow name="travelontip_externalsystemFlow" doc:id="86a986f2-88b0-46dd-8c18-12ea04896e52" >
+		<http:listener doc:name="Listener" doc:id="df078af1-e62c-4247-b2fe-0f9f2c8f5bd2" config-ref="HTTP_Listener_config" path="${http.listener.path}"/>
+		<logger level="INFO" doc:name="Logger" doc:id="19ee9a18-1f8a-446f-94c4-0d8451d053b9" />
+	</flow>
+</mule>
