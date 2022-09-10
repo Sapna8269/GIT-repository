@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd"></mule>
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="7cd421e1-6605-480c-afcf-a1958f6b841a" >
+		<db:my-sql-connection host="${db.MySql.host}" port="${db.MySql.port}" user="${db.MySql.username}" password="${db.MySql.password}" />
+	</db:config>
+	<configuration-properties doc:name="Configuration properties" doc:id="6cfae772-116c-49eb-b947-591e5f6d732a" file="Config\local.yaml" />
+	<flow name="TravelOnTip_GetRoutes_ImplimentationFlow" doc:id="3ed97de0-9385-4b89-a28b-f14d87a7710c" >
+		<logger level="INFO" doc:name="Logger" doc:id="4c7e51a1-1f8b-4d4d-8bcf-2f5f85324497" message="Fetching Routes for TravelOnTip for Transaction Id #[attributes.headers.Transaction_id]"/>
+		<db:select doc:name="Select" doc:id="83a7fbcd-1dff-4b05-a7cc-5a602749e703" config-ref="Database_Config">
+			<db:sql ><![CDATA[select * from routes where Company_name = 'TravelOnTip']]></db:sql>
+		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="5a1298b5-9652-4268-9e9b-7bd1ebe32d1b" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

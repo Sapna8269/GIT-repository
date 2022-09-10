@@ -2,4 +2,12 @@ http:
  listener:
   host: "localhost"
   port: "8081"
-  path: "/getRoutes"
+  path: "TravelOnTip/{Servicetype}"
+  
+db:
+  MySql:
+   host: "localhost"
+   port: "5121"
+   username: "dummy"
+   password: "dummy"
+   database: ""

@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd"></mule>
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	<flow name="TravelOntip_GetSchedules_implementationFlow" doc:id="0017d733-0b02-4c55-bf88-e43f59683a20" >
+		<logger level="INFO" doc:name="Logger" doc:id="46964f88-b8ff-4908-ad0b-9fdcf8f7d922" message="Fetching Schedules for TravelOnTip for Transaction Id #[attributes.headers.Transaction_id]"/>
+		<db:select doc:name="Select" doc:id="a982d672-7d92-4184-a5de-24fc1bb37e65" />
+	</flow>
+</mule>
